@@ -18,6 +18,9 @@ public class SecurityConfig {
             .formLogin(AbstractHttpConfigurer::disable)
             //브라우저 팝업 인증창 비활성화
             .httpBasic(AbstractHttpConfigurer::disable)
+            .headers(headers -> headers
+                .frameOptions(frameOptions -> frameOptions.sameOrigin())
+            )
             //요청 Filter
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().permitAll()
