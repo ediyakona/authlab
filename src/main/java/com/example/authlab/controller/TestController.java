@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.authlab.user.UserService;
+import com.example.authlab.user.dto.UserLoginRequest;
+import com.example.authlab.user.dto.UserLoginResponse;
 import com.example.authlab.user.dto.UserSignupRequest;
 
 @RestController
@@ -23,11 +25,17 @@ public class TestController {
         return "Hello, World!223555623225";
     }
 
+    //curl -X POST http://localhost:8080/login -H "Content-Type: application/json" -d '{"loginId":"ediyakona","password":"1234"}'
     @PostMapping("/signup")
     public String signup(@RequestBody UserSignupRequest request) {
         userService.signup(request);
         return "회원가입 완료";
     }
 
+    //curl -X POST http://localhost:8080/signup -H "Content-Type: application/json" -d '{"loginId":"ediyakona","password":"1234"}'
+    @PostMapping("/login")
+    public UserLoginResponse login(@RequestBody UserLoginRequest request) {
+        return userService.login(request);
+    }
 
 }

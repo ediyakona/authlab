@@ -27,6 +27,9 @@ public class User {
     @Column(nullable = false)
     private UserRole role;
 
+    protected User() {
+    }
+
     public User(String loginId, String password, UserRole role) {
         this.loginId = loginId;
         this.password = password;
