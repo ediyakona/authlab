@@ -3,6 +3,7 @@ package com.example.authlab.user;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.authlab.jwt.JwtHmacProvider;
 import com.example.authlab.user.dto.UserLoginRequest;
 import com.example.authlab.user.dto.UserLoginResponse;
 import com.example.authlab.user.dto.UserSignupRequest;
@@ -12,10 +13,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtHmacProvider jwtProvider;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtHmacProvider jwtProvider) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtProvider = jwtProvider;
     }
 
     public void signup(UserSignupRequest request) {
@@ -43,9 +46,12 @@ public class UserService {
             throw new IllegalArgumentException(UserMessage.MSG_2.getLocaleMessage());
         }
 
+        String accessToken = jwtProvider.createToken(user);
+
         return new UserLoginResponse(
             user.getLoginId(),
-            user.getRole().name()
+            user.getRole().name(),
+            accessToken
         );
     }
 
