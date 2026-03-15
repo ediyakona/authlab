@@ -25,7 +25,7 @@ public class TestController {
     @GetMapping("/hello")
     public String hello() {
         System.out.println("HELLO");
-        return "Hello, World!223555623225";
+        return "Hello, World!22";
     }
 
     //curl -X POST http://localhost:8080/signup -H "Content-Type: application/json" -d '{"loginId":"ediyakona","password":"1234"}'

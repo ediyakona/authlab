@@ -1,0 +1,13 @@
+services:
+  authlab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: authlab
+    ports:
+      - "8080:8080"
+  #  environment:
+  #    - SPRING_PROFILES_ACTIVE=dev
+  #   volumes:
+  #     - .:/app
+  #   command: ./gradlew bootRun
